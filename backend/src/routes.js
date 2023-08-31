@@ -3,6 +3,7 @@ const routes = express.Router()
 
 // Controllers
 const UsuariosController = require('./controllers/UsuariosController')
+const TipoAtivosController = require('./controllers/TipoAtivosController')
 
 // System
 routes.get('/sys', (req, res) => {
@@ -18,6 +19,13 @@ routes.get('/usuarios/:id', UsuariosController.show)
 routes.post('/usuarios/', UsuariosController.create)
 routes.put('/usuarios/:id', UsuariosController.update)
 routes.delete('/usuarios/:id', UsuariosController.delete)
+
+// TipoAtivos
+routes.get('/tipoativos/', TipoAtivosController.index)
+routes.get('/tipoativos/:id', TipoAtivosController.show)
+routes.post('/tipoativos/', TipoAtivosController.create)
+routes.put('/tipoativos/:id', TipoAtivosController.update)
+routes.delete('/tipoativos/:id', TipoAtivosController.delete)
 
 // Export
 module.exports = routes
