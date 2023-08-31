@@ -1,0 +1,15 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#20d3d7",
+    "statusBar.foreground": "#000000",
+
+    "statusBarItem.remoteBackground": "#ed1458",
+    "statusBarItem.remoteForeground": "#ffffff",
+    "statusBarItem.hoverBackground": "#d00042",
+
+    "statusBar.border": "#000"
+  }
+}
