@@ -4,9 +4,9 @@ const papeis = {
   USER: 'USER'
 }
 
-const permicoes = (permicoes) => {
+const permissoes = (permissoes) => {
   return (req, res, next) => {
-    if (!permicoes.includes(req.user.role)) {
+    if (!permissoes.includes(req.user.papel)) {
       return res.status(401).json({
         success: false,
         message: 'user.permission.denied'
@@ -17,4 +17,4 @@ const permicoes = (permicoes) => {
   }
 }
 
-module.exports = { papeis, permicoes }
+module.exports = { papeis, permissoes }
