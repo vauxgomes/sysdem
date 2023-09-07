@@ -1,5 +1,10 @@
+const bcrypt = require('bcrypt')
+require('dotenv').config()
+
 exports.seed = async function (knex) {
   console.log('Seeds: Usuários')
+
+  const SALT = Number(process.env.SALT)
 
   await knex('usuarios').del()
   await knex('usuarios').insert([
@@ -7,14 +12,14 @@ exports.seed = async function (knex) {
       nome: 'Root',
       email: 'root@email.com',
       username: 'root',
-      password: 'root',
+      password: bcrypt.hashSync('root', SALT),
       papel: 'ROOT'
     },
     {
       nome: 'Admin',
       email: 'admin@email.com',
       username: 'admin',
-      password: 'admin',
+      password: bcrypt.hashSync('admin', SALT),
       papel: 'ADMIN'
     }
   ])

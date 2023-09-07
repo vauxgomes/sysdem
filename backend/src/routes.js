@@ -8,6 +8,9 @@ const AtivosController = require('./controllers/AtivosController')
 const StaffController = require('./controllers/StaffController')
 const DemandasController = require('./controllers/DemandasController')
 
+// Middlewares
+const encryptPassword = require('./middlewares/encryptpassword')
+
 // System
 routes.get('/sys', (req, res) => {
   res.send({
@@ -19,8 +22,8 @@ routes.get('/sys', (req, res) => {
 // Usuarios
 routes.get('/usuarios/', UsuariosController.index)
 routes.get('/usuarios/:id', UsuariosController.show)
-routes.post('/usuarios/', UsuariosController.create)
-routes.put('/usuarios/:id', UsuariosController.update)
+routes.post('/usuarios/', encryptPassword, UsuariosController.create)
+routes.put('/usuarios/:id', encryptPassword, UsuariosController.update)
 routes.delete('/usuarios/:id', UsuariosController.delete)
 
 // TipoAtivos
