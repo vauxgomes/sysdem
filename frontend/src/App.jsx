@@ -10,6 +10,8 @@ import StaffFormPage from './pages/StaffPage/StaffFormPage'
 import StaffListPage from './pages/StaffPage/StaffListPage'
 import TipoAtivosFormPage from './pages/TipoAtivosPage/TiposAtivosFormPage'
 import TipoAtivosListPage from './pages/TipoAtivosPage/TiposAtivosListPage'
+import UsuariosFormPage from './pages/UsuariosPage/UsuariosFormPage'
+import UsuariosListPage from './pages/UsuariosPage/UsuariosListPage'
 import ContextProvider, { Context } from './providers/contexts/context'
 
 function App() {
@@ -37,6 +39,12 @@ function Organizer() {
       <TopBar />
       <main>
         <Routes>
+          <Route path="usuarios/">
+            <Route index element={<UsuariosListPage />} />
+            <Route path="form" element={<UsuariosFormPage />} />
+            <Route path="form/:id" element={<UsuariosFormPage />} />
+          </Route>
+
           <Route path="ativos/">
             <Route index element={<AtivosListPage />} />
             <Route path="form" element={<AtivosFormPage />} />

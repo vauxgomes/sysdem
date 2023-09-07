@@ -17,10 +17,52 @@ class APIService {
     return this
   }
 
+  // LOVs
+
+  async getLovsPapeis() {
+    const response = await this.api.get('/lovs/papeis', this.config)
+    return response.data
+  }
+
   // LOGIN
 
   async login(username, password) {
     const response = await this.api.post('/login', { username, password })
+    return response.data
+  }
+
+  // USUÁRIOS
+
+  async getUsuarios() {
+    const response = await this.api.get('/usuarios', this.config)
+    return response.data
+  }
+
+  async getUsuario(id) {
+    const response = await this.api.get(`/usuarios/${id}`, this.config)
+    return response.data
+  }
+
+  async postUsuario({ nome, email, username, password }) {
+    const response = await this.api.post(
+      '/usuarios',
+      { nome, email, username, password },
+      this.config
+    )
+    return response.data
+  }
+
+  async putUsuario(id, { nome, email, username, password, papel, estado }) {
+    const response = await this.api.put(
+      `/usuarios/${id}`,
+      { nome, email, username, password, papel, estado },
+      this.config
+    )
+    return response.data
+  }
+
+  async deleteUsuario(id) {
+    const response = await this.api.delete(`/usuarios/${id}`, this.config)
     return response.data
   }
 
