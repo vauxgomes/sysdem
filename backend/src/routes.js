@@ -5,6 +5,7 @@ const routes = express.Router()
 const UsuariosController = require('./controllers/UsuariosController')
 const TipoAtivosController = require('./controllers/TipoAtivosController')
 const AtivosController = require('./controllers/AtivosController')
+const StaffController = require('./controllers/StaffController')
 
 // System
 routes.get('/sys', (req, res) => {
@@ -34,6 +35,13 @@ routes.get('/ativos/:id', AtivosController.show)
 routes.post('/ativos/', AtivosController.create)
 routes.put('/ativos/:id', AtivosController.update)
 routes.delete('/ativos/:id', AtivosController.delete)
+
+// Staff
+routes.get('/staff/', StaffController.index)
+routes.get('/staff/:id', StaffController.show)
+routes.post('/staff/', StaffController.create)
+routes.put('/staff/:id', StaffController.update)
+routes.delete('/staff/:id', StaffController.delete)
 
 // Export
 module.exports = routes
