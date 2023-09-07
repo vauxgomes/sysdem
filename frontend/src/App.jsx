@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
 import TopBar from './components/TopBar'
+import AtivosFormPage from './pages/AtivosPage/AtivosFormPage'
+import AtivosListPage from './pages/AtivosPage/AtivosListPage'
 import DemandasPage from './pages/DemandasPage'
 import ErrorPage from './pages/ErrorPage'
 import LoginPage from './pages/LoginPage'
@@ -9,7 +11,6 @@ import StaffListPage from './pages/StaffPage/StaffListPage'
 import TipoAtivosFormPage from './pages/TipoAtivosPage/TiposAtivosFormPage'
 import TipoAtivosListPage from './pages/TipoAtivosPage/TiposAtivosListPage'
 import ContextProvider, { Context } from './providers/contexts/context'
-import { useContext } from 'react'
 
 function App() {
   return (
@@ -36,6 +37,12 @@ function Organizer() {
       <TopBar />
       <main>
         <Routes>
+          <Route path="ativos/">
+            <Route index element={<AtivosListPage />} />
+            <Route path="form" element={<AtivosFormPage />} />
+            <Route path="form/:id" element={<AtivosFormPage />} />
+          </Route>
+
           <Route path="tipoativos/">
             <Route index element={<TipoAtivosListPage />} />
             <Route path="form" element={<TipoAtivosFormPage />} />

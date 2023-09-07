@@ -59,6 +59,41 @@ class APIService {
     return response.data
   }
 
+  // TIPO ATIVOS
+
+  async getAtivos() {
+    const response = await this.api.get('/ativos', this.config)
+    return response.data
+  }
+
+  async getAtivo(id) {
+    const response = await this.api.get(`/ativos/${id}`, this.config)
+    return response.data
+  }
+
+  async postAtivo({ nome, descricao, tipo_id }) {
+    const response = await this.api.post(
+      '/ativos',
+      { nome, descricao, tipo_id },
+      this.config
+    )
+    return response.data
+  }
+
+  async putAtivo(id, { nome, descricao, tipo_id }) {
+    const response = await this.api.put(
+      `/ativos/${id}`,
+      { nome, descricao, tipo_id },
+      this.config
+    )
+    return response.data
+  }
+
+  async deleteAtivo(id) {
+    const response = await this.api.delete(`/ativos/${id}`, this.config)
+    return response.data
+  }
+
   // STAFF
 
   async getStaffs() {

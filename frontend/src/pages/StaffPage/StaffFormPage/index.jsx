@@ -57,7 +57,7 @@ export default function StaffFormPage() {
       </HeaderTitle>
 
       <form className="row g-2 mb-4" onSubmit={handleSubmit}>
-        <div className="col-12 mt-0">
+        <div className="col-12">
           <label htmlFor="nome" className="form-label">
             Nome
           </label>

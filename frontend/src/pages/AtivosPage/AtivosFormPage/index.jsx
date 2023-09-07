@@ -7,59 +7,54 @@ import HeaderTitle from '../../../components/HeaderTitle'
 import { Context } from '../../../providers/contexts/context'
 import apiService from '../../../providers/services/api-service'
 
-export default function TipoAtivosFormPage() {
+export default function AtivosFormPage() {
   const { id } = useParams()
   const { token } = useContext(Context)
 
   const [nome, setNome] = useState('')
   const [descricao, setDescricao] = useState('')
+  const [tipoAtivoId, setTipoAtivoId] = useState('')
+
+  const [tipoAtivos, setTipoAtivos] = useState([])
 
   useEffect(() => {
-    apiService.setToken(token)
+    apiService.setToken(token).getTipoAtivos().then(setTipoAtivos)
 
     if (!id) {
       return
     }
 
-    apiService.getTipoAtivo(id).then((res) => {
+    apiService.getAtivo(id).then((res) => {
       setNome(res.nome)
       setDescricao(res.descricao)
+      setTipoAtivoId(res.tipo_id)
     })
   }, [token, id])
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const tipoAtivo = { nome, descricao }
+    const ativo = { nome, descricao, tipo_id: tipoAtivoId }
 
     if (id) {
       // Update PUT
-      apiService
-        .setToken(token)
-        .putTipoAtivo(id, tipoAtivo)
-        .then((res) => {
-          alert('Atualizado com sucesso')
-        })
+      apiService.putAtivo(id, ativo).then((res) => {
+        alert('Atualizado com sucesso')
+      })
     } else {
       // Create POST
-      apiService
-        .setToken(token)
-        .postTipoAtivo(tipoAtivo)
-        .then((res) => {
-          alert('Criado com sucesso')
-        })
+      apiService.postAtivo(ativo).then((res) => {
+        alert('Criado com sucesso')
+      })
     }
   }
 
   return (
     <div className="container p-3">
-      <BreadCrumbs path="Tipos Ativos/Formulário" />
+      <BreadCrumbs path="Ativos/Formulário" />
 
-      <HeaderTitle
-        title="Tipos de Ativos"
-        subtitle="Os tipos são categorias de ativos da instituição"
-      >
-        <NavLink className="btn btn-sm btn-dark" to="/tipoativos">
+      <HeaderTitle title="Ativos" subtitle="Todos os ativos da instituição">
+        <NavLink className="btn btn-sm btn-dark" to="/ativos">
           <i className="bx bx-list-ul me-2"></i> Listar
         </NavLink>
       </HeaderTitle>
@@ -77,6 +72,29 @@ export default function TipoAtivosFormPage() {
             value={nome || ''}
             onChange={(e) => setNome(e.target.value)}
           />
+        </div>
+
+        <div className="col-12">
+          <label htmlFor="tipo" className="form-label">
+            Tipo
+          </label>
+          <select
+            id="tipo"
+            className="form-select"
+            required
+            value={tipoAtivoId || ''}
+            onChange={(e) => setTipoAtivoId(e.target.value)}
+          >
+            <option value="" disabled>
+              Escolha...
+            </option>
+
+            {tipoAtivos.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.nome}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="col-12">
