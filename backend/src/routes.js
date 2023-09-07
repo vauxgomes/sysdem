@@ -8,6 +8,7 @@ const AtivosController = require('./controllers/AtivosController')
 const StaffController = require('./controllers/StaffController')
 const DemandasController = require('./controllers/DemandasController')
 const SessionController = require('./controllers/SessionController')
+const LovsController = require('./controllers/LovsController')
 
 // Middlewares
 const auth = require('./middlewares/auth')
@@ -146,6 +147,9 @@ routes.delete(
   permissoes([papeis.ROOT, papeis.ADMIN]),
   DemandasController.delete
 )
+
+// Lovs
+routes.get('/lovs/papeis', auth, LovsController.papeis)
 
 // Export
 module.exports = routes
