@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import HeaderTitle from '../../../components/HeaderTitle'
 import BreadCrumbs from '../../../components/BreadCrumbs'
+import TokenService from '../../../providers/services/token-service'
 
 export default function StaffListPage() {
   return (

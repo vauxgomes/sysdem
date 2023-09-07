@@ -1,6 +1,10 @@
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Context } from '../../providers/contexts/context'
 
 export default function TopBar() {
+  const { handleLogout } = useContext(Context)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
       <div className="container">
@@ -65,7 +69,10 @@ export default function TopBar() {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <button className="dropdown-item d-flex align-items-center gap-2">
+              <button
+                className="dropdown-item d-flex align-items-center gap-2"
+                onClick={handleLogout}
+              >
                 <i className="bx bx-log-out"></i>Sair
               </button>
             </li>

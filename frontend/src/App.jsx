@@ -8,20 +8,24 @@ import StaffFormPage from './pages/StaffPage/StaffFormPage'
 import StaffListPage from './pages/StaffPage/StaffListPage'
 import TipoAtivosFormPage from './pages/TipoAtivosPage/TiposAtivosFormPage'
 import TipoAtivosListPage from './pages/TipoAtivosPage/TiposAtivosListPage'
+import ContextProvider, { Context } from './providers/contexts/context'
+import { useContext } from 'react'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DemandasPage />} />
-        <Route path="*" element={<Organizer />} />
-      </Routes>
-    </BrowserRouter>
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<DemandasPage />} />
+          <Route path="*" element={<Organizer />} />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   )
 }
 
 function Organizer() {
-  const isAuthenticated = true
+  const { isAuthenticated } = useContext(Context)
 
   if (!isAuthenticated) {
     return <LoginPage />
