@@ -6,6 +6,7 @@ const UsuariosController = require('./controllers/UsuariosController')
 const TipoAtivosController = require('./controllers/TipoAtivosController')
 const AtivosController = require('./controllers/AtivosController')
 const StaffController = require('./controllers/StaffController')
+const DemandasController = require('./controllers/DemandasController')
 
 // System
 routes.get('/sys', (req, res) => {
@@ -42,6 +43,13 @@ routes.get('/staff/:id', StaffController.show)
 routes.post('/staff/', StaffController.create)
 routes.put('/staff/:id', StaffController.update)
 routes.delete('/staff/:id', StaffController.delete)
+
+// Demandas
+routes.get('/demandas/', DemandasController.index)
+routes.get('/demandas/:id', DemandasController.show)
+routes.post('/demandas/', DemandasController.create)
+routes.put('/demandas/:id', DemandasController.update)
+routes.delete('/demandas/:id', DemandasController.delete)
 
 // Export
 module.exports = routes
