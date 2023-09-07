@@ -80,11 +80,11 @@ module.exports = {
   // Update
   async update(req, res) {
     const { id } = req.params
-    const { nome, decricao, tipo_id, estado } = req.body
+    const { nome, descricao, tipo_id, estado } = req.body
 
     try {
       await knex('ativos')
-        .update({ nome, decricao, tipo_id, estado })
+        .update({ nome, descricao, tipo_id, estado })
         .where({ id })
 
       return res.status(200).send({
