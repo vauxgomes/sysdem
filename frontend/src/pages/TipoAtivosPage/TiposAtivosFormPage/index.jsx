@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
+
 import BreadCrumbs from '../../../components/BreadCrumbs'
 import HeaderTitle from '../../../components/HeaderTitle'
+
 import { Context } from '../../../providers/contexts/context'
 import apiService from '../../../providers/services/api-service'
 
 export default function TipoAtivosFormPage() {
-  let { id } = useParams()
+  const { id } = useParams()
   const { token } = useContext(Context)
 
   const [nome, setNome] = useState('')

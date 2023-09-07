@@ -58,6 +58,33 @@ class APIService {
     const response = await this.api.delete(`/tipoativos/${id}`, this.config)
     return response.data
   }
+
+  // STAFF
+
+  async getStaffs() {
+    const response = await this.api.get('/staff', this.config)
+    return response.data
+  }
+
+  async getStaff(id) {
+    const response = await this.api.get(`/staff/${id}`, this.config)
+    return response.data
+  }
+
+  async postStaff({ nome }) {
+    const response = await this.api.post('/staff', { nome }, this.config)
+    return response.data
+  }
+
+  async putStaff(id, { nome, descricao }) {
+    const response = await this.api.put(`/staff/${id}`, { nome }, this.config)
+    return response.data
+  }
+
+  async deleteStaff(id) {
+    const response = await this.api.delete(`/staff/${id}`, this.config)
+    return response.data
+  }
 }
 
 export default new APIService()
