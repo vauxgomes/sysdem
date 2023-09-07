@@ -12,6 +12,7 @@ const SessionController = require('./controllers/SessionController')
 // Middlewares
 const auth = require('./middlewares/auth')
 const encryptPassword = require('./middlewares/encryptpassword')
+const { papeis, permicoes } = require('./middlewares/roles')
 
 // System
 routes.get('/sys', (req, res) => {
@@ -25,39 +26,126 @@ routes.get('/sys', (req, res) => {
 routes.post('/login', SessionController.register)
 
 // Usuarios
-routes.get('/usuarios/', auth, UsuariosController.index)
-routes.get('/usuarios/:id', auth, UsuariosController.show)
-routes.post('/usuarios/', auth, encryptPassword, UsuariosController.create)
-routes.put('/usuarios/:id', auth, encryptPassword, UsuariosController.update)
-routes.delete('/usuarios/:id', auth, UsuariosController.delete)
+routes.get(
+  '/usuarios/',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  UsuariosController.index
+)
+routes.get(
+  '/usuarios/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  UsuariosController.show
+)
+routes.post(
+  '/usuarios/',
+  auth,
+  encryptPassword,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  UsuariosController.create
+)
+routes.put(
+  '/usuarios/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  encryptPassword,
+  UsuariosController.update
+)
+routes.delete(
+  '/usuarios/:id',
+  auth,
+  permicoes([papeis.ROOT]),
+  UsuariosController.delete
+)
 
 // TipoAtivos
 routes.get('/tipoativos/', TipoAtivosController.index)
 routes.get('/tipoativos/:id', auth, TipoAtivosController.show)
-routes.post('/tipoativos/', auth, TipoAtivosController.create)
-routes.put('/tipoativos/:id', auth, TipoAtivosController.update)
-routes.delete('/tipoativos/:id', auth, TipoAtivosController.delete)
+routes.post(
+  '/tipoativos/',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  TipoAtivosController.create
+)
+routes.put(
+  '/tipoativos/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  TipoAtivosController.update
+)
+routes.delete(
+  '/tipoativos/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  TipoAtivosController.delete
+)
 
 // Ativos
 routes.get('/ativos/', AtivosController.index)
 routes.get('/ativos/:id', auth, AtivosController.show)
-routes.post('/ativos/', auth, AtivosController.create)
-routes.put('/ativos/:id', auth, AtivosController.update)
-routes.delete('/ativos/:id', auth, AtivosController.delete)
+routes.post(
+  '/ativos/',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  AtivosController.create
+)
+routes.put(
+  '/ativos/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  AtivosController.update
+)
+routes.delete(
+  '/ativos/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  AtivosController.delete
+)
 
 // Staff
 routes.get('/staff/', auth, StaffController.index)
 routes.get('/staff/:id', auth, StaffController.show)
-routes.post('/staff/', auth, StaffController.create)
-routes.put('/staff/:id', auth, StaffController.update)
-routes.delete('/staff/:id', auth, StaffController.delete)
+routes.post(
+  '/staff/',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  StaffController.create
+)
+routes.put(
+  '/staff/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  StaffController.update
+)
+routes.delete(
+  '/staff/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  StaffController.delete
+)
 
 // Demandas
 routes.get('/demandas/', auth, DemandasController.index)
 routes.get('/demandas/:id', auth, DemandasController.show)
-routes.post('/demandas/', auth, DemandasController.create)
-routes.put('/demandas/:id', auth, DemandasController.update)
-routes.delete('/demandas/:id', auth, DemandasController.delete)
+routes.post(
+  '/demandas/',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  DemandasController.create
+)
+routes.put(
+  '/demandas/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  DemandasController.update
+)
+routes.delete(
+  '/demandas/:id',
+  auth,
+  permicoes([papeis.ROOT, papeis.ADMIN]),
+  DemandasController.delete
+)
 
 // Export
 module.exports = routes
