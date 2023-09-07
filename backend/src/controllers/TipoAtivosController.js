@@ -60,7 +60,6 @@ module.exports = {
     const { nome, descricao, estado } = req.body
 
     try {
-      console.log(nome, descricao, estado)
       await knex('tipoativos').update({ nome, descricao, estado }).where({ id })
 
       return res.status(200).send({
