@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import TopBar from './components/TopBar'
 import AtivosFormPage from './pages/AtivosPage/AtivosFormPage'
 import AtivosListPage from './pages/AtivosPage/AtivosListPage'
+import DashboardPage from './pages/DashboardPage'
 import DemandasPage from './pages/DemandasPage'
 import ErrorPage from './pages/ErrorPage'
 import LoginPage from './pages/LoginPage'
@@ -39,6 +40,8 @@ function Organizer() {
       <TopBar />
       <main>
         <Routes>
+          <Route path="dashboard/" element={<DashboardPage />} />
+
           <Route path="usuarios/">
             <Route index element={<UsuariosListPage />} />
             <Route path="form" element={<UsuariosFormPage />} />

@@ -31,6 +31,13 @@ class APIService {
     return response.data
   }
 
+  // DEMANDAS
+
+  async postDemanda({ descricao, ativo_id }) {
+    const response = await this.api.post('/demandas', { descricao, ativo_id })
+    return response.data
+  }
+
   // USUÁRIOS
 
   async getUsuarios() {
@@ -105,6 +112,14 @@ class APIService {
 
   async getAtivos() {
     const response = await this.api.get('/ativos', this.config)
+    return response.data
+  }
+
+  async getAtivosByTipo(tipo_id) {
+    const response = await this.api.get(
+      `/ativos?tipo_id=${tipo_id}`,
+      this.config
+    )
     return response.data
   }
 

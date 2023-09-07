@@ -1,6 +1,44 @@
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import apiService from '../../providers/services/api-service'
 
 export default function DemandasPage() {
+  const [tipoAtivo, setTipoAtivo] = useState('')
+  const [ativo, setAtivo] = useState('')
+  const [descricao, setDescricao] = useState('')
+
+  const [tipoAtivos, setTipoAtivos] = useState([])
+  const [ativos, setAtivos] = useState([])
+
+  useEffect(() => {
+    apiService.getTipoAtivos().then(setTipoAtivos)
+  }, [null])
+
+  useEffect(() => {
+    if (!tipoAtivo) {
+      return
+    }
+
+    setAtivo('')
+    apiService.getAtivosByTipo(tipoAtivo).then(setAtivos)
+  }, [tipoAtivo])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const demanda = { descricao, ativo_id: ativo }
+
+    apiService.postDemanda(demanda).then((res) => {
+      if (res.success) {
+        alert('Demanda enviada com sucesso')
+
+        setTipoAtivo('')
+        setAtivo('')
+        setDescricao('')
+      }
+    })
+  }
+
   return (
     <div className="s-page s-page-dark p-5">
       <div className="container d-flex flex-column justify-content-between h-100">
@@ -18,7 +56,10 @@ export default function DemandasPage() {
             </div>
 
             <div className=" col-md-12 col-lg-6">
-              <form className="s-bg-dark rounded px-2 py-3 row gap-3">
+              <form
+                className="s-bg-dark rounded px-2 py-3 row gap-3"
+                onSubmit={handleSubmit}
+              >
                 <div className="col-12">
                   <label htmlFor="tipoDemanda" className="form-label">
                     Tipo de demanda
@@ -26,12 +67,19 @@ export default function DemandasPage() {
                   <select
                     id="tipoDemanda"
                     className="form-select"
-                    defaultValue=""
                     required
+                    value={tipoAtivo || ''}
+                    onChange={(e) => setTipoAtivo(e.target.value)}
                   >
                     <option value="" disabled>
                       Escolha...
                     </option>
+
+                    {tipoAtivos.map((t) => (
+                      <option key={t.id} value={t.id}>
+                        {t.nome}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -42,12 +90,19 @@ export default function DemandasPage() {
                   <select
                     id="local"
                     className="form-select"
-                    defaultValue=""
                     required
+                    value={ativo || ''}
+                    onChange={(e) => setAtivo(e.target.value)}
                   >
                     <option value="" disabled>
                       Escolha...
                     </option>
+
+                    {ativos.map((a) => (
+                      <option key={a.id} value={a.id}>
+                        {a.nome}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -61,19 +116,15 @@ export default function DemandasPage() {
                     placeholder="Descreva sua demanda"
                     rows={6}
                     required
+                    value={descricao || ''}
+                    onChange={(e) => setDescricao(e.target.value)}
                   ></textarea>
                 </div>
 
                 <div className="col">
                   <div className="row g-2">
-                    <div className="col-2 d-grid">
-                      <button className="btn btn-primary s-btn-flex">
-                        <i className="bx bxs-camera"></i>
-                      </button>
-                    </div>
-
-                    <div className="col-10 d-grid">
-                      <button className="btn btn-secondary">Enviar</button>
+                    <div className="col d-grid">
+                      <button className="btn btn-success">Enviar</button>
                     </div>
                   </div>
                 </div>
@@ -82,7 +133,7 @@ export default function DemandasPage() {
           </div>
         </main>
 
-        <footer className="sticky-bottom text-secondary text-end">
+        <footer className="my-5 text-secondary text-end">
           Sistema de Demandas
         </footer>
       </div>

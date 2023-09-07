@@ -25,6 +25,17 @@ export default function TopBar() {
             <li>
               <NavLink
                 className="dropdown-item d-flex align-items-center gap-2"
+                to="/"
+              >
+                <i className="bx bx-news"></i> Demandas
+              </NavLink>
+            </li>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
+            <li>
+              <NavLink
+                className="dropdown-item d-flex align-items-center gap-2"
                 to="/usuarios"
               >
                 <i className="bx bx-user"></i> Usuários
