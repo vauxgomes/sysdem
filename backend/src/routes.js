@@ -7,6 +7,7 @@ const TipoAtivosController = require('./controllers/TipoAtivosController')
 const AtivosController = require('./controllers/AtivosController')
 const StaffController = require('./controllers/StaffController')
 const DemandasController = require('./controllers/DemandasController')
+const SessionController = require('./controllers/SessionController')
 
 // Middlewares
 const encryptPassword = require('./middlewares/encryptpassword')
@@ -18,6 +19,9 @@ routes.get('/sys', (req, res) => {
     version: process.env.APP_VERSION
   })
 })
+
+// Login
+routes.post('/login', SessionController.register)
 
 // Usuarios
 routes.get('/usuarios/', UsuariosController.index)
